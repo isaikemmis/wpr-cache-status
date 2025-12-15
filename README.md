@@ -24,10 +24,25 @@ WPR Cache Status provides a comprehensive overview of your website's cache and R
 
 ## Installation
 
-1. Download the plugin files
-2. Upload the `wpr-cache-status` folder to `/wp-content/plugins/`
-3. Activate the plugin through the 'Plugins' menu in WordPress
-4. Navigate to **Settings > WP Rocket** to view the Cache Status section
+### Method 1: WordPress Admin Upload (Recommended)
+
+1. Download the plugin ZIP file
+2. Log in to your WordPress admin dashboard
+3. Navigate to **Plugins > Add New**
+4. Click the **Upload Plugin** button at the top
+5. Click **Choose File** and select the downloaded ZIP file
+6. Click **Install Now**
+7. After installation, click **Activate Plugin**
+8. Navigate to **Settings > WP Rocket** to view the Cache Status section
+
+### Method 2: Manual FTP Upload
+
+1. Download the plugin ZIP file and extract it
+2. Upload the `wpr-cache-status` folder to `/wp-content/plugins/` via FTP
+3. Log in to your WordPress admin dashboard
+4. Navigate to **Plugins** menu
+5. Find "WPR Cache Status" and click **Activate**
+6. Navigate to **Settings > WP Rocket** to view the Cache Status section
 
 ## Usage
 
