@@ -7,6 +7,7 @@
  * Author: Isai Kemmis
  * Author URI: https://github.com/isaikemmis/
  * Text Domain: wpr-cache-status
+ * License: GPL-2.0+
  */
 
 defined('ABSPATH') || exit;
@@ -62,9 +63,6 @@ class WPR_Cache_Status {
                   /// Initialize AJAX handler
                   WPR_Cache_Status_Ajax::init();
             }
-
-            /// Load text domain
-            add_action('plugins_loaded', array(__CLASS__, 'load_textdomain'));
       }
 
       /// WP Rocket required notice
@@ -74,10 +72,5 @@ class WPR_Cache_Status {
                   <p><?php esc_html_e('WPR Cache Status requires WP Rocket to be installed and activated.', 'wpr-cache-status'); ?></p>
             </div>
             <?php
-      }
-
-      /// Load text domain
-      public static function load_textdomain(){
-            load_plugin_textdomain('wpr-cache-status', false, dirname(plugin_basename(WPR_CACHE_STATUS_PLUGIN_FILE)) . '/languages/');
       }
 }

@@ -10,12 +10,13 @@ class WPR_Cache_Status_Ajax {
       /// Get cache and RUCSS status for all URLs
       public static function get_status(){
             /// Verify nonce
-            if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'rocket_warmup_table_nonce')){
-                  wp_send_json_error(array('message' => __('Invalid nonce', 'rocket-warmup-table')));
+            $nonce = empty($_POST['nonce']) ? '' : wp_unslash($_POST['nonce']);
+            if (!isset($nonce) || !wp_verify_nonce($nonce, 'rocket_warmup_table_nonce')){
+                  wp_send_json_error(array('message' => __('Invalid nonce', 'wpr-cache-status')));
             }
 
             if (!current_user_can('manage_options')){
-                  wp_send_json_error(array('message' => __('Insufficient permissions', 'rocket-warmup-table')));
+                  wp_send_json_error(array('message' => __('Insufficient permissions', 'wpr-cache-status')));
             }
 
             /// Check if RUCSS is enabled
@@ -67,7 +68,7 @@ class WPR_Cache_Status_Ajax {
                         'url' => $url,
                         'cache_status' => $cache_status,
                         'last_modified' => $cache_info['modified'] ? 
-                              human_time_diff(strtotime($cache_info['modified']), current_time('timestamp')) . ' ' . __('ago', 'rocket-warmup-table') : '-'
+                              human_time_diff(strtotime($cache_info['modified']), current_time('timestamp')) . ' ' . __('ago', 'wpr-cache-status') : '-'
                   );
                   
                   if ($cache_status === 'cached') {

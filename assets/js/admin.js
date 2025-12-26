@@ -13,9 +13,9 @@
         },
 
         bindEvents: function() {
-            $('#rocket-warmup-table-refresh').on('click', this.loadStatus.bind(this));
-            $('#rocket-warmup-table-search').on('input', this.handleSearch.bind(this));
-            $('#rocket-warmup-table-per-page').on('change', this.handlePerPageChange.bind(this));
+            $('#wpr-cache-status-refresh').on('click', this.loadStatus.bind(this));
+            $('#wpr-cache-status-search').on('input', this.handleSearch.bind(this));
+            $('#wpr-cache-status-per-page').on('change', this.handlePerPageChange.bind(this));
             // Auto-load on page load
             this.loadStatus();
         },
@@ -37,13 +37,13 @@
 
         loadStatus: function() {
             var self = this;
-            var $tbody = $('#rocket-warmup-table-body');
+            var $tbody = $('#wpr-cache-status-body');
             var $container = $('#rocket-warmup-content');
 
             // Show loading overlay
             $container.addClass('is-loading');
 
-            $tbody.html('<tr><td colspan="4" class="rocket-warmup-table-loading">' + 
+            $tbody.html('<tr><td colspan="4" class="wpr-cache-status-loading">' + 
                 wprCacheStatus.strings.loading + '</td></tr>');
 
             $.ajax({
@@ -78,15 +78,15 @@
         },
 
         renderTable: function(data) {
-            var $tbody = $('#rocket-warmup-table-body');
+            var $tbody = $('#wpr-cache-status-body');
             var html = '';
 
             if (data.length === 0) {
-                html = '<tr><td colspan="4" class="rocket-warmup-table-loading">' + 
+                html = '<tr><td colspan="4" class="wpr-cache-status-loading">' + 
                     'No URLs found' + '</td></tr>';
                 $tbody.html(html);
-                $('#rocket-warmup-table-pagination').hide();
-                $('#rocket-warmup-table-info').text('');
+                $('#wpr-cache-status-pagination').hide();
+                $('#wpr-cache-status-info').text('');
                 return;
             }
 
@@ -99,7 +99,7 @@
             // Render rows
             $.each(pageData, function(index, item) {
                 html += '<tr>';
-                html += '<td><a href="' + item.url + '" target="_blank" class="rocket-warmup-table-url">' + 
+                html += '<td><a href="' + item.url + '" target="_blank" class="wpr-cache-status-url">' + 
                     item.url + '</a></td>';
                 html += '<td>' + this.getCacheStatusBadge(item.cache_status) + '</td>';
                 if (this.rucssEnabled) {
@@ -113,17 +113,17 @@
             this.updateTableHeaders();
 
             // Update info
-            $('#rocket-warmup-table-info').text('Showing ' + (start + 1) + '-' + end + ' of ' + data.length);
-            $('#rocket-warmup-table-showing').text('Total: ' + this.allData.length + ' URLs' + 
+            $('#wpr-cache-status-info').text('Showing ' + (start + 1) + '-' + end + ' of ' + data.length);
+            $('#wpr-cache-status-showing').text('Total: ' + this.allData.length + ' URLs' + 
                 (this.filteredData.length !== this.allData.length ? ' (filtered: ' + this.filteredData.length + ')' : ''));
 
             // Render pagination
             this.renderPagination(totalPages);
-            $('#rocket-warmup-table-pagination').show();
+            $('#wpr-cache-status-pagination').show();
         },
 
         renderPagination: function(totalPages) {
-            var $nav = $('#rocket-warmup-table-nav');
+            var $nav = $('#wpr-cache-status-nav');
             var html = '';
 
             if (totalPages <= 1) {
@@ -195,7 +195,7 @@
             var colspan = this.rucssEnabled ? 4 : 3;
             
             // Update loading colspan
-            $('.rocket-warmup-table-loading').attr('colspan', colspan);
+            $('.wpr-cache-status-loading').attr('colspan', colspan);
         },
 
         getCacheStatusBadge: function(status) {
@@ -243,8 +243,8 @@
         },
 
         showError: function() {
-            var $tbody = $('#rocket-warmup-table-body');
-            $tbody.html('<tr><td colspan="4" class="rocket-warmup-table-loading" style="color: #d63638;">' + 
+            var $tbody = $('#wpr-cache-status-body');
+            $tbody.html('<tr><td colspan="4" class="wpr-cache-status-loading" style="color: #d63638;">' + 
                 wprCacheStatus.strings.error + '</td></tr>');
         }
     };
